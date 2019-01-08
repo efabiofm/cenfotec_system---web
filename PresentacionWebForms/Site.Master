@@ -1,0 +1,165 @@
+﻿<%@ master language="C#" autoeventwireup="true" codebehind="Site.Master.cs" inherits="PresentacionWebForms.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="es">
+<head runat="server">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title><%: Page.Title %>|Cenfotec</title>
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="Content/jquery-jvectormap-1.2.2.css">
+    <link rel="stylesheet" href="Content/AdminLTE.min.css">
+    <link rel="stylesheet" href="Content/_all-skins.css">
+    <link rel="stylesheet" href="Content/Site.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+</head>
+<body class="hold-transition skin-purple sidebar-mini">
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="respond" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <asp:ScriptReference Path="//code.jquery.com/jquery-1.10.2.js" />
+                <asp:ScriptReference Path="//code.jquery.com/ui/1.11.4/jquery-ui.js" />
+                <asp:ScriptReference Path="Scripts/bootstrap3-wysihtml5.all.min.js" />
+                <asp:ScriptReference Path="Scripts/jquery.slimscroll.min.js" />
+                <asp:ScriptReference Path="Scripts/fastclick.min.js" />
+                <asp:ScriptReference Path="Scripts/app.min.js" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+        <div class="wrapper">
+            <header class="main-header">
+                <a href="#" class="logo">
+                    <span class="logo-mini">CFC</span>
+                    <span class="logo-lg">Cenfotec</span>
+                </a>
+                <nav class="navbar navbar-static-top" role="navigation">
+                    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                    </a>
+                    <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown user user-menu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <img src="http://loremflickr.com/320/240/abstract" class="user-image" alt="User Image">
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="user-header">
+                                        <img src="http://loremflickr.com/320/240/abstract" class="img-circle" alt="User Image">
+                                        <p runat="server" id="datosUser">
+                                            Nombre de usuario - rol
+                                            <small>Fecha de nacimiento</small>
+                                        </p>
+                                    </li>
+                                    <li class="user-footer">
+                                        <div class="pull-right">
+                                            <asp:LinkButton runat="server" class="btn btn-default btn-flat" onClick="cerrarSesion" ID="logOut">Cerrar sesion</asp:LinkButton>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            <aside class="main-sidebar">
+                <section class="sidebar">
+                    <div class="user-panel">
+                        <div class="pull-left image">
+                            <img src="http://loremflickr.com/160/160/abstract" class="img-circle" alt="User Image">
+                        </div>
+                        <div class="pull-left info">
+                            <p runat="server" id="UserLoged">Usuario logeado</p>
+                            <a href="#"><i class="fa fa-circle text-success"></i>Online</a>
+                        </div>
+                    </div>
+
+                    <ul class="sidebar-menu">
+                        <li class="header">Menu</li>
+                        <li class="treeview active">
+                            <a runat="server" href="#" ID="botonMenuInicio">
+                                <i class="fa fa-home"></i>
+                                <span>Inicio</span>
+                            </a>
+                        </li>
+                        <li class="treeview" runat="server" id="botonMenuEvaluaciones" visible="false">
+                            <a href="#">
+                                <i class="fa fa-edit"></i><span>Evaluaciones</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><asp:LinkButton runat= "server" onClick='goToEvaluationsListPage'><i class="fa fa-circle-o"></i>Plantillas</asp:LinkButton></li>
+                                <li><asp:LinkButton runat= "server" onClick='goToQuestionsListPage'><i class="fa fa-circle-o"></i>Preguntas</asp:LinkButton></li>
+                            </ul>
+                        </li>
+                        <li class="treeview" runat="server" id="botonMenuKpis" visible="false">
+                            <a href="#">
+                                <i class="fa fa-pie-chart"></i>
+                                <span>KPI</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><asp:LinkButton runat= "server" onClick='goToSalesKpiPage'><i class="fa fa-circle-o"></i>KPI de ventas</asp:LinkButton></li>
+                                <li><asp:LinkButton runat= "server" onClick='goToProductsKpiPage'><i class="fa fa-circle-o"></i>KPI de prospectos</asp:LinkButton></li>
+                                <li><asp:LinkButton runat= "server" onClick='goToProspectusKpiPage'><i class="fa fa-circle-o"></i>KPI de productos</asp:LinkButton></li>
+                                <li><a href="#"><i class="fa fa-circle-o"></i>KPI ganancias por ventas</a></li>
+                                <li><a href="#"><i class="fa fa-circle-o"></i>KPI de evaluaciones</a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview" runat="server" id="botonMenuReportes" visible="false">
+                            <a href="#">
+                                <i class="fa fa-table"></i><span>Reportes</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="#"><i class="fa fa-circle-o"></i>Ganancias de agente</a></li>
+                                <li><a href="#"><i class="fa fa-circle-o"></i>Ventas agente por año</a></li>
+                                <li><a href="#"><i class="fa fa-circle-o"></i>Ganancias agente por año</a></li>
+                                <li><a href="#"><i class="fa fa-circle-o"></i>Reporte de evaluaciones</a></li>
+                                <li><a href="#"><i class="fa fa-circle-o"></i>Evaluacion por profesor</a></li>
+                                <li><a href="#"><i class="fa fa-circle-o"></i>Reporte de prospectos</a></li>
+                                <li><a href="#"><i class="fa fa-circle-o"></i>Origen de prospectos</a></li>
+                                <li><a href="#"><i class="fa fa-circle-o"></i>Reporte de eventos</a></li>
+                                <li><a href="#"><i class="fa fa-circle-o"></i>Reporte bitacora</a></li>
+                            </ul>
+                            </li>
+                    </ul>
+                    
+                </section>
+            </aside>
+            <div class="content-wrapper">
+                <div class="container body-content">
+                    <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                        <%--AQUI VA SU CODIGO--%>
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+            <footer class="main-footer">
+                <strong>Copyright &copy; 2015 <a href="https://www.ucenfotec.ac.cr">Cenfotec</a>.</strong> All rights reserved.
+            </footer>
+        </div>
+    </form>
+</body>
+</html>
